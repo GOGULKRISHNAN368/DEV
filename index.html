@@ -554,6 +554,12 @@
     </style>
 </head>
 <body>
+    <!-- Hidden audio element -->
+    <audio id="bgAudio" loop>
+        <source src="audio.aac" type="audio/aac">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="heart-container" id="heartContainer"></div>
 
     <div class="hero">
@@ -675,8 +681,54 @@
         <span id="musicText">Music Playing...</span>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script>
+        // Audio autoplay functionality
+        const audio = document.getElementById('bgAudio');
+        const musicButton = document.getElementById('musicButton');
+        const musicText = document.getElementById('musicText');
+        let isPlaying = false;
+
+        // Function to play audio
+        function playAudio() {
+            audio.play().then(() => {
+                isPlaying = true;
+                musicText.textContent = 'Music Playing...';
+            }).catch((error) => {
+                console.log('Autoplay prevented:', error);
+                musicText.textContent = 'Click to Play Music';
+            });
+        }
+
+        // Attempt autoplay on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                playAudio();
+            }, 500);
+        });
+
+        // Toggle music on button click
+        musicButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                musicText.textContent = 'Music Paused';
+            } else {
+                playAudio();
+            }
+        });
+
+        // Fallback: Try to play on any user interaction
+        const startAudio = () => {
+            if (!isPlaying) {
+                playAudio();
+            }
+            document.body.removeEventListener('click', startAudio);
+            document.body.removeEventListener('touchstart', startAudio);
+        };
+
+        document.body.addEventListener('click', startAudio, { once: true });
+        document.body.addEventListener('touchstart', startAudio, { once: true });
+
         // Countdown calculation
         function updateCountdown() {
             const startDate = new Date('2021-11-22');
@@ -720,7 +772,7 @@
 
         setInterval(createHeart, 800);
 
-        // Envelope interaction - Click to open
+        // Envelope interaction
         const envelope = document.getElementById('envelope');
         const closeLetter = document.getElementById('closeLetter');
 
@@ -748,86 +800,6 @@
                 rose.style.transform = `rotate(${scrolled * 0.1 * (i + 1)}deg) translateY(${scrolled * 0.05}px)`;
             });
         });
-
-        // Auto-play music on page load
-        let synth, reverb, pattern;
-        let musicPlaying = false;
-
-        async function initMusic() {
-            try {
-                await Tone.start();
-                
-                reverb = new Tone.Reverb({
-                    decay: 4,
-                    wet: 0.4
-                }).toDestination();
-
-                synth = new Tone.PolySynth(Tone.Synth, {
-                    oscillator: {
-                        type: 'sine'
-                    },
-                    envelope: {
-                        attack: 0.8,
-                        decay: 0.5,
-                        sustain: 0.7,
-                        release: 2
-                    }
-                }).connect(reverb);
-
-                synth.volume.value = -12;
-
-                const melody = [
-                    { time: '0:0', note: 'E4', duration: '2n' },
-                    { time: '0:2', note: 'G4', duration: '2n' },
-                    { time: '1:0', note: 'A4', duration: '2n' },
-                    { time: '1:2', note: 'B4', duration: '4n' },
-                    { time: '1:3', note: 'A4', duration: '4n' },
-                    { time: '2:0', note: 'G4', duration: '2n' },
-                    { time: '2:2', note: 'E4', duration: '2n' },
-                    { time: '3:0', note: 'D4', duration: '2n' },
-                    { time: '3:2', note: 'E4', duration: '2n' },
-                    { time: '4:0', note: 'E4', duration: '1n' }
-                ];
-
-                pattern = new Tone.Part((time, note) => {
-                    synth.triggerAttackRelease(note.note, note.duration, time);
-                }, melody);
-
-                pattern.loop = true;
-                pattern.loopEnd = '5m';
-                
-                Tone.Transport.start();
-                pattern.start(0);
-                
-                musicPlaying = true;
-                document.getElementById('musicText').textContent = 'Music Playing...';
-            } catch (error) {
-                console.log('Music initialization failed:', error);
-                document.getElementById('musicText').textContent = 'Click to Play Music';
-            }
-        }
-
-        // Try to auto-play when page loads
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                initMusic();
-            }, 1000);
-        });
-
-        // Also allow manual play via button click
-        document.getElementById('musicButton').addEventListener('click', async function() {
-            if (!musicPlaying) {
-                await initMusic();
-            }
-        });
-
-        // Interaction to trigger audio context (for mobile browsers)
-        document.body.addEventListener('click', function initAudio() {
-            if (!musicPlaying) {
-                initMusic();
-            }
-            document.body.removeEventListener('click', initAudio);
-        }, { once: true });
     </script>
 </body>
 </html>
