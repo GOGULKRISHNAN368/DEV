@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Dearest Devi Priya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #1a0000 0%, #4a0000 50%, #1a0000 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="rg"><stop offset="0%25" stop-color="%23ff0040" stop-opacity="0.1"/><stop offset="100%25" stop-color="%23ff0040" stop-opacity="0"/></radialGradient></defs><circle cx="600" cy="400" r="300" fill="url(%23rg)"/></svg>');
+            animation: pulse 4s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .names {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 0, 64, 0.8), 0 0 60px rgba(255, 0, 64, 0.4);
+            animation: glow 2s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 0, 64, 0.8), 0 0 60px rgba(255, 0, 64, 0.4); }
+            50% { text-shadow: 0 0 40px rgba(255, 0, 64, 1), 0 0 80px rgba(255, 0, 64, 0.6); }
+        }
+
+        .names .amp {
+            font-size: 3rem;
+            color: #ff6b9d;
+            margin: 0 1rem;
+        }
+
+        .countdown-container {
+            margin: 2rem 0;
+            z-index: 1;
+        }
+
+        .countdown-title {
+            font-size: 1.3rem;
+            color: #ffb3c6;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 0, 64, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #ffb3c6;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #ff6b9d;
+            animation: bounce 2s infinite;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        .letter-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            position: relative;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(74, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        .letter-container {
+            perspective: 1500px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+
+        .envelope.opened {
+            transform: translateY(-100px);
+        }
+
+        .envelope-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 3px solid #ff6b9d;
+            transition: all 0.6s ease;
+        }
+
+        .envelope-text {
+            font-size: 1.8rem;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 1rem;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .envelope-icon {
+            font-size: 4rem;
+            animation: float-envelope 3s ease-in-out infinite;
+        }
+
+        @keyframes float-envelope {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(135deg, #dc143c 0%, #ff1744 100%);
+            border-radius: 10px 10px 0 0;
+            transform-origin: top center;
+            transition: transform 0.8s ease;
+            border: 3px solid #ff6b9d;
+            border-bottom: none;
+            z-index: 2;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .envelope.opened .envelope-flap {
+            transform: rotateX(-180deg);
+        }
+
+        .letter-paper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 95%;
+            max-width: 750px;
+            background: linear-gradient(to bottom, #fff9f0 0%, #ffe6e6 100%);
+            padding: 3rem 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease;
+            pointer-events: none;
+            z-index: 3;
+            color: #4a0000;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .envelope.opened .letter-paper {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -60%);
+            pointer-events: auto;
+        }
+
+        .letter-header {
+            font-size: 2rem;
+            color: #8b0000;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-style: italic;
+            border-bottom: 2px solid #ff6b9d;
+            padding-bottom: 1rem;
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a0000;
+            text-align: left;
+            font-family: 'Brush Script MT', cursive, 'Georgia', serif;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-signature {
+            text-align: right;
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(139, 0, 0, 0.2);
+            color: #8b0000;
+            font-style: italic;
+        }
+
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .rose {
+            position: absolute;
+            font-size: 3rem;
+            animation: rotate 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rose1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .rose2 { top: 20%; right: 15%; animation-delay: 2s; }
+        .rose3 { bottom: 15%; left: 20%; animation-delay: 4s; }
+        .rose4 { bottom: 10%; right: 10%; animation-delay: 6s; }
+
+        .final-message {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: radial-gradient(ellipse at center, rgba(139, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        .message-box {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .message-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #ff6b9d;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.8);
+        }
+
+        .message-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: #ffb3c6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .music-status {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 107, 157, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 107, 157, 0.4);
+            border-radius: 30px;
+            padding: 1rem 1.5rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(255, 0, 64, 0.4);
+            cursor: pointer;
+        }
+
+        .music-icon {
+            font-size: 1.5rem;
+            animation: music-pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes music-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .close-letter {
+            position: sticky;
+            top: 10px;
+            right: 10px;
+            float: right;
+            background: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .names { font-size: 2.5rem; }
+            .countdown { flex-wrap: wrap; gap: 1rem; }
+            .countdown-item { padding: 1rem 1.5rem; }
+            .countdown-number { font-size: 2rem; }
+            .envelope { height: 350px; max-width: 500px; }
+            .envelope-text { font-size: 1.3rem; padding: 0 1rem; }
+            .envelope-icon { font-size: 3rem; }
+            .letter-paper { 
+                padding: 2rem 1.5rem; 
+                width: 90%;
+                max-height: 70vh;
+            }
+            .letter-header { font-size: 1.5rem; }
+            .letter-content { font-size: 1rem; line-height: 1.6; }
+            .letter-signature { font-size: 1.2rem; }
+            .envelope.opened { transform: translateY(-80px); }
+            .envelope.opened .letter-paper { transform: translate(-50%, -50%); }
+            .music-status { top: 1rem; right: 1rem; padding: 0.8rem 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .names { font-size: 2rem; }
+            .envelope { height: 300px; max-width: 90%; }
+            .envelope-text { font-size: 1.1rem; }
+            .letter-paper { padding: 1.5rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container" id="heartContainer"></div>
+
+    <div class="hero">
+        <div class="rose rose1">🌹</div>
+        <div class="rose rose2">🌹</div>
+        <div class="rose rose3">🌹</div>
+        <div class="rose rose4">🌹</div>
+        
+        <div class="names">
+            Gogul Krishnan <span class="amp">&</span> Devi Priya
+        </div>
+        
+        <div class="countdown-container">
+            <div class="countdown-title">OUR JOURNEY TOGETHER</div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="years">0</div>
+                    <div class="countdown-label">Years</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="months">0</div>
+                    <div class="countdown-label">Months</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">💌</div>
+    </div>
+
+    <div class="letter-section">
+        <div class="letter-container">
+            <div class="envelope-wrapper">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-body">
+                        <div class="envelope-icon">💌</div>
+                        <div class="envelope-text">Click to Open My Heart</div>
+                    </div>
+                    <div class="envelope-flap"></div>
+                    <div class="letter-paper" id="letterPaper">
+                        <button class="close-letter" id="closeLetter">✕</button>
+                        <div class="letter-header">To My Dearest Devi Priya</div>
+                        <div class="letter-content">
+                            <p>My Princess,</p>
+                            
+                            <p>As I sit here writing this, my heart overflows with emotions that words can barely capture. You are not just someone I love – you are the dream I never knew I had, the prayer I whispered into the universe, and the miracle that appeared in my life.</p>
+                            
+                            <p>I know our journey hasn't been conventional. There may be distance between us, moments of silence, days without calls or messages. But through it all, one truth remains constant and unshakeable – you live in my heart, not as a fleeting thought, but as the very essence of everything beautiful I hold dear.</p>
+                            
+                            <p>I admire you beyond measure. You are not someone who loses herself in relationships – you are a princess who dreams fearlessly, who stands strong for her family, who lives with purpose and dignity. Your character, your values, your strength – these are the qualities that made me fall in love with you, and these are the reasons I will never, ever give up on us.</p>
+                            
+                            <p>Not today. Not tomorrow. Not ever.</p>
+                            
+                            <p>Every sunrise reminds me of your smile. Every star in the night sky reflects the sparkle in your eyes. Every beat of my heart whispers your name. You have become a part of me in ways I never thought possible.</p>
+                            
+                            <p>I promise you this: I will wait for you, support you, cherish you, and love you with every fiber of my being. Your dreams are my dreams. Your happiness is my purpose. Your success is my celebration.</p>
+                            
+                            <p>Thank you for being exactly who you are. Thank you for existing. Thank you for being mine, even in the quiet moments when the world can't see what we share.</p>
+                            
+                            <p>Here's to us – to our past, our present, and the beautiful future that awaits us. Here's to every day we've spent together and every tomorrow we will share.</p>
+                            
+                            <p>Forever yours, with all my love and devotion,</p>
+                            
+                            <div class="letter-signature">Your Gogul ❤️</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="final-message">
+        <div class="message-box">
+            <div class="message-title">Forever & Always</div>
+            <div class="message-text">
+                November 22, 2021 – The day my forever began<br><br>
+                Every moment with you is a treasure.<br>
+                Every day with you is a blessing.<br>
+                You are my today and all of my tomorrows.
+            </div>
+        </div>
+    </div>
+
+    <div class="music-status" id="musicButton">
+        <div class="music-icon">🎵</div>
+        <span id="musicText">Tap to Play Music</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script>
+        // Countdown calculation
+        function updateCountdown() {
+            const startDate = new Date('2021-11-22');
+            const now = new Date();
+            
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 86400000);
+
+        // Floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+            document.getElementById('heartContainer').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+
+        setInterval(createHeart, 800);
+
+        // Envelope interaction - Click to open
+        const envelope = document.getElementById('envelope');
+        const closeLetter = document.getElementById('closeLetter');
+
+        envelope.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('close-letter')) {
+                this.classList.add('opened');
+            }
+        });
+
+        closeLetter.addEventListener('click', function(e) {
+            e.stopPropagation();
+            envelope.classList.remove('opened');
+        });
+
+        // Smooth scroll
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.letter-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const roses = document.querySelectorAll('.rose');
+            roses.forEach((rose, i) => {
+                rose.style.transform = `rotate(${scrolled * 0.1 * (i + 1)}deg) translateY(${scrolled * 0.05}px)`;
+            });
+        });
+
+        // Music - Must be initiated by user interaction on mobile
+        let synth, reverb, pattern;
+        let musicPlaying = false;
+
+        async function initMusic() {
+            try {
+                await Tone.start();
+                
+                reverb = new Tone.Reverb({
+                    decay: 4,
+                    wet: 0.4
+                }).toDestination();
+
+                synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: {
+                        type: 'sine'
+                    },
+                    envelope: {
+                        attack: 0.8,
+                        decay: 0.5,
+                        sustain: 0.7,
+                        release: 2
+                    }
+                }).connect(reverb);
+
+                synth.volume.value = -12;
+
+                const melody = [
+                    { time: '0:0', note: 'E4', duration: '2n' },
+                    { time: '0:2', note: 'G4', duration: '2n' },
+                    { time: '1:0', note: 'A4', duration: '2n' },
+                    { time: '1:2', note: 'B4', duration: '4n' },
+                    { time: '1:3', note: 'A4', duration: '4n' },
+                    { time: '2:0', note: 'G4', duration: '2n' },
+                    { time: '2:2', note: 'E4', duration: '2n' },
+                    { time: '3:0', note: 'D4', duration: '2n' },
+                    { time: '3:2', note: 'E4', duration: '2n' },
+                    { time: '4:0', note: 'E4', duration: '1n' }
+                ];
+
+                pattern = new Tone.Part((time, note) => {
+                    synth.triggerAttackRelease(note.note, note.duration, time);
+                }, melody);
+
+                pattern.loop = true;
+                pattern.loopEnd = '5m';
+                
+                Tone.Transport.start();
+                pattern.start(0);
+                
+                musicPlaying = true;
+                document.getElementById('musicText').textContent = 'Playing for you...';
+            } catch (error) {
+                console.log('Music initialization failed:', error);
+            }
+        }
+
+        // Music button click handler for mobile
+        document.getElementById('musicButton').addEventListener('click', async function() {
+            if (!musicPlaying) {
+                await initMusic();
+            }
+        });
+
+        // Try to auto-play on desktop (will fail on mobile due to autoplay policy)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                initMusic().catch(() => {
+                    // Silent fail - user will need to click music button
+                    console.log('Auto-play blocked - user must interact first');
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
